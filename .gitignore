@@ -1,0 +1,3 @@
+# ignoring vendor directory, 
+# you can download them from AdminLTE or import from vendor.zip
+vendor/
