@@ -1,5 +1,5 @@
 <?php
-    // session_start();
+    session_start();
 
     $error = 0;
 
@@ -16,18 +16,19 @@
     }
 
     // sprawdzenie czy email i powtorzony email sa identyczne
-    if (($_POST['email1'] != $_POST['email2']) || 
-        ($_POST['pass1'] != $_POST['pass2'])){
+    if (($_POST['email1'] != $_POST['email2']) || ($_POST['pass1'] != $_POST['pass2'])){
+        $_SESSION['email_or_pass_warning'] = "Sprawdź czy powtórnie wprowadzone dane są identyczne";
         $error = 1;
-        // TODO: sesja z komunikatem o roznym emailu badz hasle
     }
-
+    
     if ($error == 1){
         echo "<script>history.back()</script>";
         exit();
     }
 
     require_once 'connect.php';
+
+    // TODO: sprawdzenie czy user o eamil1 jest juz w DB
 
     $pass = password_hash($_POST['pass1'], PASSWORD_ARGON2ID);
 
@@ -37,25 +38,14 @@
         $stmt->execute();
 
         if ($stmt->affected_rows == 1){
-            echo "ok";
-            // $_SESSION['success'] = "Prawidłowo dodano użytkownika $_POST[email1]";
+            $_SESSION['success'] = "Prawidłowo dodano użytkownika $_POST[email1]";
         }
     } catch (Exception $e){
         echo $e->getMessage();
         if ($stmt->affected_rows != 1){
-            echo "nie ok";
-            // $_SESSION['error'] = "Nie udało się dodać użytkownika $_POST[email1]";
+            $_SESSION['error'] = "Nie udało się dodać użytkownika $_POST[email1]";
         }
     }
     
-
-
-    
-    // else{
-    //     echo "nie ok";
-    //     $_SESSION['error'] = "Nie udało się dodać użytkownika";
-    //     exit();
-    // }
-
-    // header('location: ../');
+    header('location: ../');
 ?>

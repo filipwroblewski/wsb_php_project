@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -15,95 +18,120 @@
   <link rel="stylesheet" href="../vendor/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
-<div class="register-box">
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="../" class="h1"><b>Oto</b>sadzonki</a>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Rejestracja użytkownika</p>
 
-      <form action="../scripts/register.php" method="post">
-
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj imię" name="name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+  <?php
+    if (isset($_SESSION['email_or_pass_warning'])){
+      echo <<< INFO
+        <div class="col-md-3">
+          <div class="card card-outline card-warning">
+            <div class="card-header">
+              <h3 class="card-title">Coś poszło nie tak.</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              $_SESSION[email_or_pass_warning]
             </div>
           </div>
         </div>
+      INFO;
+    }
 
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Podaj email" name="email1">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
+    unset($_SESSION['email_or_pass_warning']);
+  ?>
 
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Powtórz email" name="email2">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Podaj hasło" name="pass1">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Powtórz hasło" name="pass2">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="agreeTerms" value="terms">
-              <label for="agreeTerms">
-               Zatwierdzam <a href="#">regulamin</a>
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Rejestuj</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
-      <div class="social-auth-links text-center">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Zaloguj używając Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Zaloguj używając Google+
-        </a>
+  <div class="register-box">
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="../" class="h1"><b>Oto</b>sadzonki</a>
       </div>
+      <div class="card-body">
+        <p class="login-box-msg">Rejestracja użytkownika</p>
 
-      <a href="../" class="text-center">Mam już konto</a>
-    </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
-</div>
-<!-- /.register-box -->
+        <form action="../scripts/register.php" method="post">
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Podaj imię" name="name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Podaj email" name="email1">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Powtórz email" name="email2">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Podaj hasło" name="pass1">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Powtórz hasło" name="pass2">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" value="terms">
+                <label for="agreeTerms">
+                Zatwierdzam <a href="#">regulamin</a>
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Rejestuj</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <div class="social-auth-links text-center">
+          <a href="#" class="btn btn-block btn-primary">
+            <i class="fab fa-facebook mr-2"></i>
+            Zaloguj używając Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i>
+            Zaloguj używając Google+
+          </a>
+        </div>
+
+        <a href="../" class="text-center">Mam już konto</a>
+      </div>
+      <!-- /.form-box -->
+    </div><!-- /.card -->
+  </div>
+  <!-- /.register-box -->
 
 <!-- jQuery -->
 <script src="../vendor/plugins/jquery/jquery.min.js"></script>
