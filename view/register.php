@@ -35,15 +35,6 @@
         </div>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj naziwsko" name="surname">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Podaj email" name="email1">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -75,15 +66,6 @@
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="date" class="form-control" placeholder="Podaj date" name="birthday">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-calendar"></span>
             </div>
           </div>
         </div>
