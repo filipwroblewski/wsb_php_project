@@ -21,7 +21,7 @@
 <body class="hold-transition register-page">
 
   <?php
-    if (isset($_SESSION['email_or_pass_warning'])){
+    if (isset($_SESSION['registerWarning'])){
       echo <<< INFO
         <div class="col-md-3">
           <div class="card card-outline card-warning">
@@ -34,14 +34,14 @@
               </div>
             </div>
             <div class="card-body">
-              $_SESSION[email_or_pass_warning]
+              $_SESSION[registerWarning]
             </div>
           </div>
         </div>
       INFO;
     }
 
-    unset($_SESSION['email_or_pass_warning']);
+    unset($_SESSION['registerWarning']);
   ?>
 
   <div class="register-box">
