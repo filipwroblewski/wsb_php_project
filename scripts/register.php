@@ -55,5 +55,5 @@
         }
     }
     
-    // header('location: ../');
+    header('location: ../');
 ?>
