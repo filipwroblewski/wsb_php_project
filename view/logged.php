@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +156,12 @@
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
+      </li>
+
+      <li class="nav-item d-none d-sm-inline-block">
+        <form action="../scripts/logout.php" method="post">
+          <button type="submit" class="btn btn-secondary">Wyloguj</button>
+        </form>
       </li>
     </ul>
   </nav>

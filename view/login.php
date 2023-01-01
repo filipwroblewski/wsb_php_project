@@ -96,15 +96,31 @@
       <div class="card-body">
         <p class="login-box-msg">Zaloguj się aby rozpocząć swoją sesję</p>
 
+        
+
         <form action="./scripts/login.php" method="post">
+
+        
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" name="email">
+            <?php
+                if (isset($_SESSION['email'])){
+                  echo <<< EMAIL
+                    <input type="email" class="form-control" placeholder="Email" name="email" value="$_SESSION[email]>
+                  EMAIL;
+                }else{
+                  echo <<< EMAIL
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                  EMAIL;
+                }
+            ?>
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+                <span class="fas fa-lock"></span>
               </div>
             </div>
           </div>
+          
+
           <div class="input-group mb-3">
             <input type="password" class="form-control" placeholder="Hasło" name="pass">
             <div class="input-group-append">
@@ -113,6 +129,7 @@
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">

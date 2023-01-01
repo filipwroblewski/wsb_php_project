@@ -16,6 +16,10 @@
         exit();
     }
 
+    if (isset($_POST['remember']) && isset($_POST['email']) && isset($_POST['pass'])){
+        $_SESSION['email'] = $_POST['email'];
+    }
+
     require_once 'connect.php';
 
     try{
