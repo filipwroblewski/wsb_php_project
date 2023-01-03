@@ -1,5 +1,5 @@
 <?php 
-  session_start(); 
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +39,8 @@
           </div>
         </div>
       INFO;
+
+      unset($_SESSION['success']);
     }
 
     if (isset($_SESSION['error'])){
@@ -59,6 +61,8 @@
           </div>
         </div>
       INFO;
+
+      unset($_SESSION['error']);
     }
 
     if (isset($_SESSION['warning'])){
@@ -79,12 +83,9 @@
           </div>
         </div>
       INFO;
-    }
 
-    unset($_SESSION['success']);
-    unset($_SESSION['error']);
-    unset($_SESSION['warning']);
-    
+      unset($_SESSION['warning']);
+    }
   ?>
  
   <div class="login-box">

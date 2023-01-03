@@ -33,6 +33,7 @@
 
         if ($stmt->affected_rows == 1 && password_verify($_POST['pass'], $user['pass'])) {
             $_SESSION['success'] = "Zalogowano prawidłowo użytkownika $_POST[email]";
+            $_SESSION['userData'] = array($user['name'], $user['role'], $user['email']);
             header('location: ../view/logged.php');
             exit();
         }else{
