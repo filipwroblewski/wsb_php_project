@@ -55,7 +55,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer clearfix">
-        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+        <a href="./logged.php?adduser=1" class="btn btn-sm btn-info float-left">Dodaj nowego użytkownika</a>
         <!-- <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a> -->
         </div>
         <!-- /.card-footer -->
@@ -63,6 +63,31 @@
     <!-- /.card -->
 
     <?php
+        if(isset($_GET['adduser'])){
+            echo "<h4>Dodanie nowego użytkownika</h4>";
+            echo <<< ADDUSER
+            <form action="../scripts/add_user.php" method="post">
+                <select name="role">
+            ADDUSER;
+            
+            // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
+            $sql="SELECT DISTINCT role FROM `users`;";
+            $result=$mysqli->query($sql);
+            while ($role=$result->fetch_assoc()){
+                if ($role['role'] == "user"){
+                    echo "<option value=\"$role[role]\" selected>$role[role]</option>";
+                }else{
+                    echo "<option value=\"$role[role]\">$role[role]</option>";
+                }
+            }
+            echo <<< ADDUSER
+                </select><br><br>
+                <input type="text" name="name" placeholder="Podaj imie"><br><br>
+                <input type="text" name="email" placeholder="Podaj email"><br><br>
+                <input type="submit" value="Dodaj użytkownika">
+            </form>
+            ADDUSER;
+        }
         if (isset($_GET['updateuserid'])){
             echo "<h4>Aktualizacja użytkownika o id=$_GET[updateuserid]</h4>";
             $sql="SELECT * FROM `users` WHERE `id`=$_GET[updateuserid]";
