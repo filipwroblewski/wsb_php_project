@@ -63,8 +63,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer clearfix">
-        <a href="./logged.php?adduser=1" class="btn btn-sm btn-info float-left">Dodaj nowego użytkownika</a>
-        <!-- <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a> -->
+            <a href="./logged.php?adduser=1" class="btn btn-sm btn-info float-left">Dodaj nowego użytkownika</a>
         </div>
         <!-- /.card-footer -->
     </div>
@@ -125,7 +124,7 @@
 
                 echo <<< UPDATEUSER
                 <div class="card-body">
-                    <form action="../scripts/add_user.php" method="post">
+                    <form action="../scripts/update_user.php" method="post">
                         <div class="form-group">
                             <label for="name1">Podaj imię</label>
                             <input type="text" id="name1" name="name" class="form-control" placeholder="Podaj imie" value="$user[name]">
