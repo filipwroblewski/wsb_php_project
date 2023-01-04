@@ -3,7 +3,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="card">
         <div class="card-header border-transparent">
-        <h3 class="card-title">Użytkownicy</h3>
+        <h3 class="card-title">Sadzonki</h3>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">

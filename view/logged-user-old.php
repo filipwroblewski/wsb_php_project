@@ -22,9 +22,10 @@
                 <thead>
                 <tr>
                     <th>Nazwa</th>
-                    <th>Cena</th>
                     <th>Opis</th>
+                    <th>Cena</th>
                     <th>Ilość</th>
+                    <th>Ile sztuk</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,10 +36,11 @@
                         while ($seedling = $result->fetch_assoc()) {
                         echo <<< E
                         <tr>
-                            <td><input type="text" name="name" value="$seedling[name]"></td>
-                            <td><input type="number" name="price" value="$seedling[price]"> zł</td>
-                            <td><textarea name="description" rows="4" cols="50">$seedling[description]</textarea></td>
-                            <td><input type="number" name="quantity" value="$seedling[quantity]"></td>
+                            <td>$seedling[name]</td>
+                            <td>$seedling[description]</td>
+                            <td>$seedling[price] zł</td>
+                            <td>$seedling[quantity]</td>
+                            <td><input type="number" name="$seedling[id]" min="0" max="$seedling[quantity]"></td>
                         </tr>
                         E;
                         }
@@ -50,8 +52,8 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-                <input type="submit" class="btn btn-sm btn-info float-left" value="Zamów sadzonki">
-            </div>
+                <a href="./logged.php?order=1" class="btn btn-sm btn-info float-left">Zamów sadzonki</a>
+        </div>
             <!-- /.card-footer -->
         </div>
         <!-- /.card -->
