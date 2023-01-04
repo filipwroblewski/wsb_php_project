@@ -62,66 +62,87 @@
     </div>
     <!-- /.card -->
 
-    <?php
-        if(isset($_GET['adduser'])){
-            echo "<h4>Dodanie nowego użytkownika</h4>";
-            echo <<< ADDUSER
-            <form action="../scripts/add_user.php" method="post">
-                <select name="role">
-            ADDUSER;
-            
-            // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
-            $sql="SELECT DISTINCT role FROM `users`;";
-            $result=$mysqli->query($sql);
-            while ($role=$result->fetch_assoc()){
-                if ($role['role'] == "user"){
-                    echo "<option value=\"$role[role]\" selected>$role[role]</option>";
-                }else{
-                    echo "<option value=\"$role[role]\">$role[role]</option>";
-                }
-            }
-            echo <<< ADDUSER
-                </select><br><br>
-                <input type="text" name="name" placeholder="Podaj imie"><br><br>
-                <input type="text" name="email" placeholder="Podaj email"><br><br>
-                <input type="submit" value="Dodaj użytkownika">
-            </form>
-            ADDUSER;
-        }
-        if (isset($_GET['updateuserid'])){
-            echo "<h4>Aktualizacja użytkownika o id=$_GET[updateuserid]</h4>";
-            $sql="SELECT * FROM `users` WHERE `id`=$_GET[updateuserid]";
-            $result = $mysqli->query($sql);
-            $user = $result->fetch_assoc();
-            // echo "$user[city_id]";
+    <div class="col-md-6">
 
-            echo <<< UPDATEUSER
-            <form action="../scripts/update_user.php" method="post">
-                <select name="role">
-            UPDATEUSER;
+    <div class="card card-primary">
+        <?php
+            if(isset($_GET['adduser'])){
+                echo "<div class=\"card-header\"><h3 class=\"card-title\">Dodanie nowego użytkownika</h3></div>";
+                echo <<< ADDUSER
+                <div class="card-body">
+                    <form action="../scripts/add_user.php" method="post">
+                        <div class="form-group">
+                            <label for="name">Podaj imię</label>
+                            <input type="text" name="name" class="form-control" placeholder="Imię">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Podaj email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Wprowadź email">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Rola</label>
+                            <select class="form-control" name="role">
+                ADDUSER;
                 
-                // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
-                $sql="SELECT DISTINCT role FROM `users`;";
-                $result=$mysqli->query($sql);
-                while ($role=$result->fetch_assoc()){
-                    if ($role['role'] == $user['role']){
-                        echo "<option value=\"$role[role]\" selected>$role[role]</option>";
-                    }else{
-                        echo "<option value=\"$role[role]\">$role[role]</option>";
+                    // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
+                    $sql="SELECT DISTINCT role FROM `users`;";
+                    $result=$mysqli->query($sql);
+                    while ($role=$result->fetch_assoc()){
+                        if ($role['role'] == "user"){
+                            echo "<option value=\"$role[role]\" selected>$role[role]</option>";
+                        }else{
+                            echo "<option value=\"$role[role]\">$role[role]</option>";
+                        }
                     }
-                }
-                
-            echo <<< UPDATEUSER
-              </select><br><br>
-              <input type="text" name="name" placeholder="Podaj imie" value="$user[name]"><br><br>
-              <input type="text" name="email" placeholder="Podaj email" value="$user[email]"><br><br>
-              <input type="submit" value="Aktualizuj dane">
-            </form>
-            UPDATEUSER;
+                echo <<< ADDUSER
+                            </select>
+                            </div>
+                        </div>
 
-            $_SESSION['updateuserid'] = $user['id'];
-          }
-      ?>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Dodaj użytkownika</button>
+                        </div>
+                    </form>
+                </div>
+                ADDUSER;
+            }
+            if (isset($_GET['updateuserid'])){
+                echo "<h4>Aktualizacja użytkownika o id=$_GET[updateuserid]</h4>";
+                $sql="SELECT * FROM `users` WHERE `id`=$_GET[updateuserid]";
+                $result = $mysqli->query($sql);
+                $user = $result->fetch_assoc();
+                // echo "$user[city_id]";
+
+                echo <<< UPDATEUSER
+                <form action="../scripts/update_user.php" method="post">
+                    <select name="role">
+                UPDATEUSER;
+                    
+                    // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
+                    $sql="SELECT DISTINCT role FROM `users`;";
+                    $result=$mysqli->query($sql);
+                    while ($role=$result->fetch_assoc()){
+                        if ($role['role'] == $user['role']){
+                            echo "<option value=\"$role[role]\" selected>$role[role]</option>";
+                        }else{
+                            echo "<option value=\"$role[role]\">$role[role]</option>";
+                        }
+                    }
+                    
+                echo <<< UPDATEUSER
+                </select><br><br>
+                <input type="text" name="name" placeholder="Podaj imie" value="$user[name]"><br><br>
+                <input type="text" name="email" placeholder="Podaj email" value="$user[email]"><br><br>
+                <input type="submit" value="Aktualizuj dane">
+                </form>
+                UPDATEUSER;
+
+                $_SESSION['updateuserid'] = $user['id'];
+            }
+        ?>
+      </div>
 
 </div>
 <!-- /.col -->
