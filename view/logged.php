@@ -865,9 +865,49 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        
+        <!-- Info row -->
+        <?php
+        if(isset($_SESSION['info'])){
+          echo <<< INFO
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Info</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body p-0">
+                <ul class="pl-2 pr-2">
+                  <li class="item">
+                  <div class="info-box mb-3 bg-info">
+                    <span class="info-box-icon"><i class="far fa-comment"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">$_SESSION[info]</span>
+                    </div>
+
+                  </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          INFO;
+
+          unset($_SESSION['info']);
+        }
+        ?>
+        
+
         <!-- Main row -->
         <div class="row">
-          
           <?php
             if(isset($_SESSION['userData'])){
               if($_SESSION['userData'][1] == 'user'){
