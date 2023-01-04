@@ -8,7 +8,7 @@
             }
         }
         require_once './connect.php';
-        $sql = "UPDATE `users` SET `role` = '$_POST[role]', `name` = '$_POST[name]', `email` = '$_POST[email]' WHERE `users`.`id` = $_SESSION[updateuserid];";
+        $sql = "UPDATE `seedlings` SET `name` = '$_POST[name]', `description` = '$_POST[description]', `price` = '$_POST[price]', `quantity` = '$_POST[quantity]' WHERE `seedlings`.`id` = $_SESSION[updateseedlingid];";
         $mysqli->query($sql);
         if ($mysqli->affected_rows){
             $_SESSION['info'] = "Prawidłowo zaktualizowano rekord";

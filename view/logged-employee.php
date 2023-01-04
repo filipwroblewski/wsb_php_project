@@ -1,60 +1,147 @@
 <!-- Left col -->
 <div class="col-md-12">
     <!-- TABLE: LATEST ORDERS -->
-    <form action="../scripts/order.php" method="POST">
-        <div class="card">
-            <div class="card-header border-transparent">
-            <h3 class="card-title">Sadzonki</h3>
+    <div class="card">
+        <div class="card-header border-transparent">
+        <h3 class="card-title">Użytkownicy</h3>
 
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-                </button>
-            </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table m-0">
-                <thead>
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Cena</th>
-                    <th>Opis</th>
-                    <th>Ilość</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        require_once("../scripts/connect.php");
-                        $sql = "SELECT * FROM `seedlings`;";
-                        $result = $mysqli->query($sql);
-                        while ($seedling = $result->fetch_assoc()) {
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+            </button>
+        </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table m-0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require_once("../scripts/connect.php");
+                    $sql = "SELECT * FROM `seedlings`;";
+                    $result = $mysqli->query($sql);
+                    while ($seedling = $result->fetch_assoc()) {
                         echo <<< E
                         <tr>
-                            <td><input type="text" name="name" value="$seedling[name]"></td>
-                            <td><input type="number" name="price" value="$seedling[price]"> zł</td>
-                            <td><textarea name="description" rows="4" cols="50">$seedling[description]</textarea></td>
-                            <td><input type="number" name="quantity" value="$seedling[quantity]"></td>
+                            <td>$seedling[id]</td>
+                            <td>$seedling[name]</td>
+                            <td>$seedling[description]</td>
+                            <td>$seedling[price]</td>
+                            <td>$seedling[quantity]</td>
+                            <td><a href="../scripts/delete_seedling.php?seedlingid=$seedling[id]">Usuń</a></td>
+                            <td><a href="./logged.php?updateseedlingid=$seedling[id]">Aktualizuj</a></td>
                         </tr>
                         E;
-                        }
-                    ?>
-                </tbody>
-                </table>
-            </div>
-            <!-- /.table-responsive -->
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                <input type="submit" class="btn btn-sm btn-info float-left" value="Zamów sadzonki">
-            </div>
-            <!-- /.card-footer -->
+                    }
+                ?>
+            </tbody>
+            </table>
         </div>
-        <!-- /.card -->
-    </form>
+        <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer clearfix">
+            <a href="./logged.php?addseedling=1" class="btn btn-sm btn-info float-left">Dodaj nową sadzonkę</a>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+
+    <div class="col-md-6">
+
+    <div class="card card-primary">
+        <?php
+            if(isset($_GET['addseedling'])){
+                echo "<div class=\"card-header\"><h3 class=\"card-title\">Dodanie nowej sadzonki</h3></div>";
+                echo <<< ADDSEEDLING
+                <div class="card-body">
+                    <form action="../scripts/add_seedling.php" method="post">
+                        <div class="form-group">
+                            <label for="name1">Podaj nazwę</label>
+                            <input type="text" id="name1" name="name" class="form-control" placeholder="Nazwa">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Opis</label>
+                            <textarea name="description" class="form-control" rows="3" placeholder="Opis ..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price1">Podaj cenę</label>
+                            <input type="number" id="price1" min="0" name="price" class="form-control" placeholder="Cena">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity1">Podaj ilość</label>
+                            <input type="number" id="quantity1" name="quantity" class="form-control" placeholder="Ilość">
+                        </div>
+
+                        </div>
+                        
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Dodaj sadzonkę</button>
+                        </div>
+                    </form>
+                </div>
+                ADDSEEDLING;
+            }
+            if (isset($_GET['updateseedlingid'])){
+                echo "<div class=\"card-header\"><h3 class=\"card-title\">Aktualizacja sadzonki o id=$_GET[updateseedlingid]</h3></div>";
+                $sql="SELECT * FROM `seedlings` WHERE `id`=$_GET[updateseedlingid]";
+                $result = $mysqli->query($sql);
+                $seedling = $result->fetch_assoc();
+
+                echo <<< UPDATESEEDLING
+                <div class="card-body">
+                    <form action="../scripts/update_seedling.php" method="post">
+                        <div class="form-group">
+                            <label for="name1">Podaj nazwę</label>
+                            <input type="text" id="name1" name="name" value="$seedling[name]" class="form-control" placeholder="Nazwa">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Opis</label>
+                            <textarea name="description" class="form-control" rows="3" placeholder="Opis ...">$seedling[description]</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price1">Podaj cenę</label>
+                            <input type="number" id="price1" min="0" name="price" value="$seedling[price]" class="form-control" placeholder="Cena">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity1">Podaj ilość</label>
+                            <input type="number" id="quantity1" name="quantity" value="$seedling[quantity]" class="form-control" placeholder="Ilość">
+                        </div>
+
+                        </div>
+                        
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Dodaj sadzonkę</button>
+                        </div>
+                    </form>
+                </div>
+                UPDATESEEDLING;
+
+                $_SESSION['updateseedlingid'] = $seedling['id'];
+            }
+        ?>
+      </div>
+
 </div>
 <!-- /.col -->

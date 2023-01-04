@@ -8,12 +8,12 @@
             }
         }
         require_once './connect.php';
-        $sql = "UPDATE `users` SET `role` = '$_POST[role]', `name` = '$_POST[name]', `email` = '$_POST[email]' WHERE `users`.`id` = $_SESSION[updateuserid];";
+        $sql="INSERT INTO `seedlings` (`id`, `name`, `description`, `price`, `quantity`) VALUES (NULL, '$_POST[name]', '$_POST[description]', '$_POST[price]', '$_POST[quantity]');";
         $mysqli->query($sql);
-        if ($mysqli->affected_rows){
-            $_SESSION['info'] = "Prawidłowo zaktualizowano rekord";
+        if ($conn->affected_rows){
+            $_SESSION['info'] = "Prawidłowo dodano rekord";
         }else{
-            $_SESSION['info'] = "Nie zaktualizowano rekordu";
+            $_SESSION['info'] = "Nie dodano rekordu";
         }
     }
     header('location: ../view/logged.php');
