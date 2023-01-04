@@ -24,6 +24,7 @@
                 <th>Nazwa</th>
                 <th>Rola</th>
                 <th>Email</th>
+                <th>Stan hasła</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -34,17 +35,24 @@
                     $sql = "SELECT * FROM `users`;";
                     $result = $mysqli->query($sql);
                     while ($user = $result->fetch_assoc()) {
-                    echo <<< E
-                    <tr>
-                        <td>$user[id]</td>
-                        <td>$user[name]</td>
-                        <td>$user[role]</td>
-                        <td>$user[email]</td>
-                        <td><a href="../scripts/delete_user.php?userid=$user[id]">Usuń</a></td>
-                        <td><a href="./logged.php?updateuserid=$user[id]">Aktualizuj</a></td>
-                    </tr>
-            
-                    E;
+                        if($user['pass'] != NULL){
+                            $passStatus = 'Ok';
+                        }else{
+                            $passStatus = 'Hasło musi zostać ustawione';
+                        }
+                        
+                        echo <<< E
+                        <tr>
+                            <td>$user[id]</td>
+                            <td>$user[name]</td>
+                            <td>$user[role]</td>
+                            <td>$user[email]</td>
+                            <td>$passStatus</td>
+                            <td><a href="../scripts/delete_user.php?userid=$user[id]">Usuń</a></td>
+                            <td><a href="./logged.php?updateuserid=$user[id]">Aktualizuj</a></td>
+                        </tr>
+                
+                        E;
                     }
                 ?>
             </tbody>
