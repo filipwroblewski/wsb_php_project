@@ -15,13 +15,23 @@
         }
     }
 
+    $fullPrice = 0;
     foreach ($_SESSION['order'] as $value) {
-        echo <<< E
-        $value[id] $value[orderQuantity] $value[price]<br>
-        E;
+        $fullPrice+=$value['orderQuantity']*$value['price'];
+        // echo <<< E
+        // $value[id] $value[orderQuantity] $value[price]<br>
+        // E;
     }
-    
+
     $_SESSION['cart'] = $_SESSION['order'];
+
+    // $_SESSION['cart'] = array_push($_SESSION['cart'], [
+    //     "id" => 0,
+    //     "user" => $_SESSION['userData'][2],
+    //     "fullPrice" => $fullPrice,
+    // ]);
+    
+    // echo "user=".$_SESSION['userData'][2]." fullPrice=".$fullPrice;
 
     header('location: ../view/logged.php');
 ?>
