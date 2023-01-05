@@ -36,11 +36,13 @@
                     "description" => $seedling['description'],
                     "price" => $seedling['price'],
                     "quantity" => $seedling['quantity'],
+                    "orderQuantity" => 0,
                 ]);
             }
         }
         
         
     }
+    
     header('location: ../view/logged.php');
 ?>

@@ -15,7 +15,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-            <form action="../scripts/order_seedling.php" method="POST">
+            <form action="./cart.php" method="POST">
                 <div class="table-responsive">
                     <table class="table m-0">
                     <thead>
@@ -30,14 +30,14 @@
                     <tbody>
                         
                         <?php
-                        foreach ($_SESSION['order'] as &$value) {
+                        foreach ($_SESSION['order'] as $value) {
                             echo <<< E
                             <tr>
                                 <td>$value[name]</td>
                                 <td>$value[description]</td>
                                 <td>$value[price]</td>
                                 <td>$value[quantity]</td>
-                                <td><input type="number" min="0" max="$value[quantity]"></td>
+                                <td><input type="number" min="0" max="$value[quantity]" name="orderQuantity[]"></td>
                             </tr>
                             E;
                         }
