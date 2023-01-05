@@ -72,4 +72,8 @@
     if(isset($_SESSION['order'])){
         include("order.php");
     }
+    if(isset($_SESSION['cart'])){
+        // include("order.php");
+        echo "KOSZYK";
+    }
 ?>

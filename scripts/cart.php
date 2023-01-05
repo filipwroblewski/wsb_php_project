@@ -20,4 +20,8 @@
         $value[id] $value[orderQuantity] $value[price]<br>
         E;
     }
+    
+    $_SESSION['cart'] = $_SESSION['order'];
+
+    header('location: ../view/logged.php');
 ?>

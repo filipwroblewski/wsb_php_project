@@ -15,7 +15,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-            <form action="./cart.php" method="POST">
+            <form action="../scripts/cart.php" method="POST">
                 <div class="table-responsive">
                     <table class="table m-0">
                     <thead>
