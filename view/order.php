@@ -30,6 +30,7 @@
                     <tbody>
                         
                         <?php
+                        // display order data
                         foreach ($_SESSION['order'] as $value) {
                             echo <<< E
                             <tr>

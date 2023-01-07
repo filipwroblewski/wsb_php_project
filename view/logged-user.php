@@ -77,6 +77,8 @@
                         
                         <?php
                             require_once("../scripts/connect.php");
+
+                            // display seedlings data
                             $sql = "SELECT * FROM `seedlings`;";
                             $result = $mysqli->query($sql);
                             while ($seedling = $result->fetch_assoc()) {
@@ -103,7 +105,6 @@
 
             <div class="card-footer clearfix">
                 <input type="submit" value="Złóż zamówienie" class="btn btn-sm btn-info float-left">
-                <!-- <a href="./logged.php?addseedling=1" class="btn btn-sm btn-info float-left">Dodaj nową sadzonkę</a> -->
             </div>
             <!-- /.card-footer -->
 
@@ -114,11 +115,14 @@
     
 
 <?php
+    // if exists $_SESSION['order'] display order.php
     if(isset($_SESSION['order'])){
-        include("order.php");
+        include("./order.php");
     }
+
+    // if exists $_SESSION['cart'] display cart.php
     if(isset($_SESSION['cart'])){
-        include("cart.php");
+        include("./cart.php");
     }
 ?>
 
@@ -153,8 +157,8 @@
                     <tbody>
                         <?php
                             $user = $_SESSION['userData'][2];
-                            $sql = "SELECT 
-                            `orders`.`order_quantity`, `orders`.`created_at`, `seedlings`.`name`, `seedlings`.`price`, `seedlings`.`description` FROM `payment` JOIN `orders` ON `payment`.`created_at` = `orders`.`created_at` JOIN `seedlings` ON `seedlings`.`id` = `orders`.`seedling_id` WHERE `orders`.`status` = 'placed' AND `payment`.`user` = '$user';";
+                            // load data about order from db
+                            $sql = "SELECT `orders`.`order_quantity`, `orders`.`created_at`, `seedlings`.`name`, `seedlings`.`price`, `seedlings`.`description` FROM `payment` JOIN `orders` ON `payment`.`created_at` = `orders`.`created_at` JOIN `seedlings` ON `seedlings`.`id` = `orders`.`seedling_id` WHERE `orders`.`status` = 'placed' AND `payment`.`user` = '$user';";
                             $result = $mysqli->query($sql);
                             while ($order = $result->fetch_assoc()) {
                                 echo <<< E
@@ -210,6 +214,8 @@
                     <tbody>
                         <?php
                             $user = $_SESSION['userData'][2];
+
+                            // load data with order status sent
                             $sql = "SELECT `orders`.`id`, `orders`.`order_quantity`, `seedlings`.`name`, `seedlings`.`description` FROM `payment` JOIN `orders` ON `payment`.`created_at` = `orders`.`created_at` JOIN `seedlings` ON `seedlings`.`id` = `orders`.`seedling_id` WHERE `orders`.`status` = 'sent' AND `payment`.`user` = '$user';";
                             $result = $mysqli->query($sql);
                             while ($order = $result->fetch_assoc()) {

@@ -1,1 +1,0 @@
-platnosc nieudana

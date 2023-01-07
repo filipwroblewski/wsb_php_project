@@ -78,6 +78,8 @@
                 <tbody>
                     <?php
                         require_once("../scripts/connect.php");
+
+                        // select seedlings data to display on website
                         $sql = "SELECT * FROM `seedlings`;";
                         $result = $mysqli->query($sql);
                         while ($seedling = $result->fetch_assoc()) {
@@ -112,6 +114,7 @@
 
     <div class="card card-primary">
         <?php
+            // if $_GET['addseedling'] then display form with nessesary fields to add seedling
             if(isset($_GET['addseedling'])){
                 echo "<div class=\"card-header\"><h3 class=\"card-title\">Dodanie nowej sadzonki</h3></div>";
                 echo <<< ADDSEEDLING
@@ -146,8 +149,12 @@
                 </div>
                 ADDSEEDLING;
             }
+
+             // if $_GET['updateseedlingid'] then display form with nessesary fields to update seedling data
             if (isset($_GET['updateseedlingid'])){
                 echo "<div class=\"card-header\"><h3 class=\"card-title\">Aktualizacja sadzonki o id=$_GET[updateseedlingid]</h3></div>";
+                
+                // load all data about seedling with given id
                 $sql="SELECT * FROM `seedlings` WHERE `id`=$_GET[updateseedlingid]";
                 $result = $mysqli->query($sql);
                 $seedling = $result->fetch_assoc();
@@ -226,6 +233,7 @@
                     </thead>
                     <tbody>
                         <?php
+                            // display orders data
                             $sql = "SELECT `orders`.`id`, `orders`.`order_quantity`, `orders`.`created_at`,`orders`.`status`, `seedlings`.`name`, `seedlings`.`price`, `seedlings`.`description` FROM `orders` JOIN `seedlings` ON `seedlings`.`id` = `orders`.`seedling_id` WHERE `orders`.`status` = 'placed';";
                             $result = $mysqli->query($sql);
                             while ($order = $result->fetch_assoc()) {

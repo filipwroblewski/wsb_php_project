@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Seedlings</title>
+  <title>Oto_sadzonki | Strona główna</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -57,7 +57,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="../vendor/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Seedlings</span>
+      <span class="brand-text font-weight-light">Oto_sadzonki</span>
     </a>
 
     <!-- Sidebar -->
@@ -84,12 +84,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard Seedling</h1>
+            <h1 class="m-0">Oto_sadzonki</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Strona główna</a></li>
-              <li class="breadcrumb-item active">Dashboard Seedling</li>
+              <li class="breadcrumb-item"><a href="#">Oto_sadzonki</a></li>
+              <li class="breadcrumb-item active">Strona główna</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -144,6 +144,7 @@
         <!-- Main row -->
         <div class="row">
           <?php
+            // enable acces to specific operations based on user role
             if(isset($_SESSION['userData'])){
               if($_SESSION['userData'][1] == 'user'){
                 include("logged-user.php");
