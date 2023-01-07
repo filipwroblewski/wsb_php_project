@@ -174,7 +174,7 @@
 
                         <div class="form-group">
                             <label for="price1">Podaj cenę</label>
-                            <input type="number" id="price1" min="0" name="price" value="$seedling[price]" class="form-control" placeholder="Cena">
+                            <input type="number" id="price1" min="0" step="0.01" name="price" value="$seedling[price]" class="form-control" placeholder="Cena">
                         </div>
 
                         <div class="form-group">
