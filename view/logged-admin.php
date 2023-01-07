@@ -1,6 +1,6 @@
 <!-- Left col -->
 <div class="col-md-12">
-    <!-- TABLE: LATEST ORDERS -->
+    <!-- TABLE: Użytkownicy -->
     <div class="card">
         <div class="card-header border-transparent">
         <h3 class="card-title">Użytkownicy</h3>
@@ -32,6 +32,8 @@
             <tbody>
                 <?php
                     require_once("../scripts/connect.php");
+
+                    // display user data and check if password exists
                     $sql = "SELECT * FROM `users`;";
                     $result = $mysqli->query($sql);
                     while ($user = $result->fetch_assoc()) {
@@ -92,8 +94,7 @@
                             <label>Rola</label>
                             <select class="form-control" name="role">
                 ADDUSER;
-                
-                    // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
+                    // display all user roles to choose
                     $sql="SELECT DISTINCT role FROM `users`;";
                     $result=$mysqli->query($sql);
                     while ($role=$result->fetch_assoc()){
@@ -120,7 +121,6 @@
                 $sql="SELECT * FROM `users` WHERE `id`=$_GET[updateuserid]";
                 $result = $mysqli->query($sql);
                 $user = $result->fetch_assoc();
-                // echo "$user[city_id]";
 
                 echo <<< UPDATEUSER
                 <div class="card-body">
@@ -139,8 +139,7 @@
                             <label>Rola</label>
                             <select class="form-control" name="role">
                 UPDATEUSER;
-                    
-                    // $sql="SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'oto_sadzonki' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'role';";
+                    // display all user roles to choose
                     $sql="SELECT DISTINCT role FROM `users`;";
                     $result=$mysqli->query($sql);
                     while ($role=$result->fetch_assoc()){

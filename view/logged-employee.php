@@ -1,4 +1,26 @@
 <?php
+    if(isset($_SESSION['addSeedlingInfo'])){
+        echo <<< INFO
+        <div class="col-md-3">
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">Informacje związane z transakcją.</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+                $_SESSION[addSeedlingInfo]
+            </div>
+          </div>
+        </div>
+      INFO;
+
+      unset($_SESSION['addSeedlingInfo']);
+    }
+
     if(isset($_SESSION['orderInfo'])){
         echo <<< INFO
         <div class="col-md-3">
@@ -107,7 +129,7 @@
 
                         <div class="form-group">
                             <label for="price1">Podaj cenę</label>
-                            <input type="number" id="price1" min="0" name="price" class="form-control" placeholder="Cena">
+                            <input type="number" id="price1" step="0.01" min="0" name="price" class="form-control" placeholder="Cena">
                         </div>
 
                         <div class="form-group">
