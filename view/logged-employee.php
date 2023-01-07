@@ -1,6 +1,30 @@
+<?php
+    if(isset($_SESSION['orderInfo'])){
+        echo <<< INFO
+        <div class="col-md-3">
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">Informacje związane z transakcją.</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+                $_SESSION[orderInfo]
+            </div>
+          </div>
+        </div>
+      INFO;
+
+      unset($_SESSION['orderInfo']);
+    }
+?>
+
 <!-- Left col -->
 <div class="col-md-12">
-    <!-- TABLE: LATEST ORDERS -->
+    <!-- TABLE: Sadzonki -->
     <div class="card">
         <div class="card-header border-transparent">
         <h3 class="card-title">Sadzonki</h3>
@@ -16,42 +40,42 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table m-0">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nazwa</th>
-                <th>Opis</th>
-                <th>Cena</th>
-                <th>Ilość</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-                <?php
-                    require_once("../scripts/connect.php");
-                    $sql = "SELECT * FROM `seedlings`;";
-                    $result = $mysqli->query($sql);
-                    while ($seedling = $result->fetch_assoc()) {
-                        echo <<< E
-                        <tr>
-                            <td>$seedling[id]</td>
-                            <td>$seedling[name]</td>
-                            <td>$seedling[description]</td>
-                            <td>$seedling[price]</td>
-                            <td>$seedling[quantity]</td>
-                            <td><a href="../scripts/delete_seedling.php?seedlingid=$seedling[id]">Usuń</a></td>
-                            <td><a href="./logged.php?updateseedlingid=$seedling[id]">Aktualizuj</a></td>
-                        </tr>
-                        E;
-                    }
-                ?>
-            </tbody>
-            </table>
-        </div>
-        <!-- /.table-responsive -->
+            <div class="table-responsive">
+                <table class="table m-0">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require_once("../scripts/connect.php");
+                        $sql = "SELECT * FROM `seedlings`;";
+                        $result = $mysqli->query($sql);
+                        while ($seedling = $result->fetch_assoc()) {
+                            echo <<< E
+                            <tr>
+                                <td>$seedling[id]</td>
+                                <td>$seedling[name]</td>
+                                <td>$seedling[description]</td>
+                                <td>$seedling[price]</td>
+                                <td>$seedling[quantity]</td>
+                                <td><a href="../scripts/delete_seedling.php?seedlingid=$seedling[id]">Usuń</a></td>
+                                <td><a href="./logged.php?updateseedlingid=$seedling[id]">Aktualizuj</a></td>
+                            </tr>
+                            E;
+                        }
+                    ?>
+                </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
         </div>
         <!-- /.card-body -->
 
@@ -145,3 +169,64 @@
 
 </div>
 <!-- /.col -->
+
+
+<div class="col-md-12">
+    <!-- TABLE: Zamówienia -->
+    <div class="card">
+            <div class="card-header border-transparent">
+            <h3 class="card-title">Zamówienia</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+                </button>
+            </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table m-0">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Liczba szt.</th>
+                        <th>Data zamówienia</th>
+                        <th>Status</th>
+                        <th>Nazwa sadzonki</th>
+                        <th>Cena sadzonki</th>
+                        <th>Opis sadzonki</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $sql = "SELECT `orders`.`id`, `orders`.`order_quantity`, `orders`.`created_at`,`orders`.`status`, `seedlings`.`name`, `seedlings`.`price`, `seedlings`.`description` FROM `orders` JOIN `seedlings` ON `seedlings`.`id` = `orders`.`seedling_id` WHERE `orders`.`status` = 'placed';";
+                            $result = $mysqli->query($sql);
+                            while ($order = $result->fetch_assoc()) {
+                                echo <<< E
+                                <tr>
+                                    <td>$order[id]</td>
+                                    <td>$order[order_quantity]</td>
+                                    <td>$order[created_at]</td>
+                                    <td>$order[status]</td>
+                                    <td>$order[name]</td>
+                                    <td>$order[price]</td>
+                                    <td>$order[description]</td>
+                                    <td><a href="../scripts/send_order.php?orderid=$order[id]">Oznacz jako wysłane</a></td>
+                                </tr>
+                                E;
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

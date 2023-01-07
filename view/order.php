@@ -2,7 +2,7 @@
     <!-- TABLE: LATEST ORDERS -->
     <div class="card">
         <div class="card-header border-transparent">
-            <h3 class="card-title">Zamówienie</h3>
+            <h3 class="card-title">Złóż zamówienie</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -54,7 +54,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer clearfix">
-                <input type="submit" value="Płacę" class="btn btn-sm btn-info float-left">
+                <input type="submit" value="Zamawiam" class="btn btn-sm btn-info float-left">
             </div>
             <!-- /.card-footer -->
 

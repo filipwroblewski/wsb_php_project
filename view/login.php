@@ -21,28 +21,6 @@
 <body class="hold-transition login-page">
 <?php
 
-    if (isset($_SESSION['success'])){
-      echo <<< INFO
-        <div class="col-md-3">
-          <div class="card card-outline card-success">
-            <div class="card-header">
-              <h3 class="card-title">Udało się!</h3>
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              $_SESSION[success]
-            </div>
-          </div>
-        </div>
-      INFO;
-
-      unset($_SESSION['success']);
-    }
-
     if (isset($_SESSION['error'])){
       echo <<< INFO
         <div class="col-md-3">
