@@ -18,10 +18,8 @@
     }
 
     // if checked remmember, remmember user data
-    if (isset($_POST['remember']) && isset($_POST['email']) && isset($_POST['pass'])){
-        // $_SESSION['email'] = $_POST['email'];
-        // $_SESSION['pass'] = $_POST['pass'];
-        $_SESSION['remember'] = array($_POST['email'], $_POST['pass']);
+    if (isset($_POST['remember'])){
+        $_SESSION['remember'] = array('email' => $_POST['email'], 'pass' => $_POST['pass']);
     }
 
     require_once 'connect.php';
@@ -50,5 +48,5 @@
         }
     }
     
-    header('location: ../');
+    // header('location: ../');
 ?>

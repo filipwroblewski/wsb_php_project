@@ -78,17 +78,12 @@
         
 
         <form action="./scripts/login.php" method="post">
-
-        
           <div class="input-group mb-3">
             <?php
-                // if(isset($_SESSION['remember'])){
-                //   echo $_SESSION['remember'][0];
-                //   echo $_SESSION['remember'][1];
-                // }
-                if (isset($_SESSION['email'])){
+                if (isset($_SESSION['remember'])){
+                  $email = $_SESSION['remember']['email'];
                   echo <<< EMAIL
-                    <input type="email" class="form-control" placeholder="Email" name="email" value="$_SESSION[email]>
+                    <input type="email" class="form-control" placeholder="Email" name="email" value="$email">
                   EMAIL;
                 }else{
                   echo <<< EMAIL
@@ -105,11 +100,14 @@
           
 
           <div class="input-group mb-3">
-          <?php
-                if (isset($_SESSION['pass'])){
+            <?php
+                if (isset($_SESSION['remember'])){
+                  $pass = $_SESSION['remember']['pass'];
                   echo <<< PASSWORD
-                    <input type="password" class="form-control" placeholder="Hasło" name="pass" value="$_SESSION[pass]>
+                    <input type="password" class="form-control" placeholder="Hasło" name="pass" value="$pass">
                   PASSWORD;
+
+                  unset($_SESSION['remember']);
                 }else{
                   echo <<< PASSWORD
                     <input type="password" class="form-control" placeholder="Hasło" name="pass">
@@ -127,7 +125,7 @@
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" id="remember">
+                <input type="checkbox" id="remember" name="remember">
                 <label for="remember">
                   Zapamiętaj mnie
                 </label>
