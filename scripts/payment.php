@@ -39,10 +39,8 @@
         $_SESSION['payment'] .= "Nie zapisano transakcji. ";
     }
 
-    
-
     unset($_SESSION['order']);
     unset($_SESSION['cart']);
 
-    // header('location: ../view/logged.php');
+    header('location: ../view/logged.php');
 ?>
