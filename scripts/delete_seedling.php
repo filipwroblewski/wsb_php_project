@@ -1,7 +1,10 @@
 <?php
     session_start();
     if (!empty($_GET['seedlingid'])){
+
         require_once './connect.php';
+
+        // remove seedling from database
         $sql="DELETE FROM seedlings WHERE `seedlings`.`id` = $_GET[seedlingid]";
         $mysqli->query($sql);
         if ($mysqli->affected_rows){

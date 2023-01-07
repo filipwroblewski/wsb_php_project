@@ -3,21 +3,25 @@
 
     $error = 0;
 
-    // sprawdzenie czy wprowadzono wszystkie dane
+    // check if all values exists
     foreach ($_POST as $key => $value){
         if (empty($value)){
             $error = 1;
         }
     }
 
+    // if $error = 1 then back to previous
     if ($error == 1){
         $_SESSION['warning'] = "Sprawdź czy wprowadziłeś wszystkie dane";
         echo "<script>history.back()</script>";
         exit();
     }
 
+    // if checked remmember, remmember user data
     if (isset($_POST['remember']) && isset($_POST['email']) && isset($_POST['pass'])){
-        $_SESSION['email'] = $_POST['email'];
+        // $_SESSION['email'] = $_POST['email'];
+        // $_SESSION['pass'] = $_POST['pass'];
+        $_SESSION['remember'] = array($_POST['email'], $_POST['pass']);
     }
 
     require_once 'connect.php';

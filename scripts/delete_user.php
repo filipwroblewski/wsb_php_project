@@ -1,7 +1,10 @@
 <?php
     session_start();
     if (!empty($_GET['userid'])){
+
         require_once './connect.php';
+
+        // remove user from database
         $sql="DELETE FROM users WHERE `users`.`id` = $_GET[userid]";
         $mysqli->query($sql);
         if ($mysqli->affected_rows){

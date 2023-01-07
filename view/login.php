@@ -82,6 +82,10 @@
         
           <div class="input-group mb-3">
             <?php
+                // if(isset($_SESSION['remember'])){
+                //   echo $_SESSION['remember'][0];
+                //   echo $_SESSION['remember'][1];
+                // }
                 if (isset($_SESSION['email'])){
                   echo <<< EMAIL
                     <input type="email" class="form-control" placeholder="Email" name="email" value="$_SESSION[email]>
@@ -94,14 +98,25 @@
             ?>
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>
           
 
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Hasło" name="pass">
+          <?php
+                if (isset($_SESSION['pass'])){
+                  echo <<< PASSWORD
+                    <input type="password" class="form-control" placeholder="Hasło" name="pass" value="$_SESSION[pass]>
+                  PASSWORD;
+                }else{
+                  echo <<< PASSWORD
+                    <input type="password" class="form-control" placeholder="Hasło" name="pass">
+                  PASSWORD;
+                }
+            ?>
+            
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -136,9 +151,6 @@
         </div>
         <!-- /.social-auth-links -->
 
-        <p class="mb-1">
-          <a href="./view/forgot-password.php">Zapomniałem hasła</a>
-        </p>
         <p class="mb-0">
           <a href="./view/register.php" class="text-center">Zarejestruj się</a>
         </p>

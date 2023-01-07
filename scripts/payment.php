@@ -3,8 +3,6 @@
 
     $_SESSION['payment'] = 'Płatność zrealizowana pomyślnie. ';
 
-    // echo $_SESSION['payment'];
-
     require_once 'connect.php';
 
     // createing orders in db
@@ -21,22 +19,19 @@
         }
     }
 
+    // save payment data
     $user = $_SESSION['cart']['user'];
     $fullPrice = $_SESSION['cart']['fullPrice'];
     $sql = "INSERT INTO `payment` (`id`, `user`, `full_price`, `created_at`) VALUES (NULL, '$user', $fullPrice, '$currentTimestamp');";
     $mysqli->query($sql);
     if ($mysqli->affected_rows){
         echo "Prawidłowo dodano rekord";
-        // $_SESSION['cart'] = "Zamówienie zostało pomyślnie złożone";
         $_SESSION['payment'] .= "Zapisano zrealizowaną transakcję. ";
     }else{
         echo "Nie dodano rekordu";
-        // $_SESSION['cart'] = "Zamówienie nie zostało dodane złożone";
         $_SESSION['payment'] .= "Nie zapisano transakcji. ";
     }
 
-    echo $_SESSION['payment'];
-    
     unset($_SESSION['order']);
     unset($_SESSION['cart']);
 

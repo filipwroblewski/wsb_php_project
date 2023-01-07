@@ -3,6 +3,7 @@
     if (!empty($_GET['orderid'])){
         require_once './connect.php';
         
+        //update order status to sent
         $sql="UPDATE `orders` SET `status` = 'sent' WHERE `orders`.`id` = $_GET[orderid];";
         $mysqli->query($sql);
         if ($mysqli->affected_rows){

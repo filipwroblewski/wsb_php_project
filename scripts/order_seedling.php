@@ -9,6 +9,7 @@
             }
         }
 
+        // load all selected seedlings
         $selectedId = $_POST['selectedid'];
         if(empty($selectedId)) 
         {
@@ -17,15 +18,17 @@
         }else{
             $N = count($selectedId);
             
+            // prepare ids to query
             $selectedIds = "";
             for($i=0; $i < $N; $i++)
             {
                 $selectedIds.=$selectedId[$i].",";
             }
             $selectedIds = substr($selectedIds, 0, -1);
-            // echo "SELECT * FROM `seedlings` WHERE `seedlings`.`id` IN (".$tmp.")";
 
             require_once './connect.php';
+
+            // create session order to collect all ordered data
             $sql="SELECT * FROM `seedlings` WHERE `seedlings`.`id` IN (".$selectedIds.")";
             $result = $mysqli->query($sql);
             $_SESSION['order'] = [];
@@ -40,8 +43,6 @@
                 ]);
             }
         }
-        
-        
     }
     
     header('location: ../view/logged.php');
