@@ -224,7 +224,7 @@
                                     <td>$order[name]</td>
                                     <td>$order[order_quantity]</td>
                                     <td>$order[description]</td>
-                                    <td><a href="../scripts/collected_order.php?orderid=$order[id]">Oznacz jako wysłane</a></td>
+                                    <td><a href="../scripts/collected_order.php?orderid=$order[id]">Oznacz jako odebrane</a></td>
                                 </tr>
                                 E;
                             }
