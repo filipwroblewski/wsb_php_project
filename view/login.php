@@ -139,16 +139,6 @@
           </div>
         </form>
 
-        <div class="social-auth-links text-center mt-2 mb-3">
-          <a href="#" class="btn btn-block btn-primary">
-            <i class="fab fa-facebook mr-2"></i> Zaloguj używając Facebook
-          </a>
-          <a href="#" class="btn btn-block btn-danger">
-            <i class="fab fa-google-plus mr-2"></i> Zaloguj używając Google+
-          </a>
-        </div>
-        <!-- /.social-auth-links -->
-
         <p class="mb-0">
           <a href="./view/register.php" class="text-center">Zarejestruj się</a>
         </p>
