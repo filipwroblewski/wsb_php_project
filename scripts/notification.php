@@ -6,10 +6,11 @@
 	require '../vendor/phpmailer/phpmailer/src/Exception.php';
 	require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 	require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+	require '../credentials/email-login.php';
   
 
 	try {
-		$email = $user;
+		$user_email = $user;
 		
 		$mail = new PHPMailer(true);
 		$today = date("Y-m-d H:i");
@@ -17,12 +18,12 @@
 		$mail->isSMTP();
 		$mail->Host = 'smtp.gmail.com';
 		$mail->SMTPAuth = true;
-		$mail->Username = 'oto.sadzonki@gmail.com';
-		$mail->Password = 'kzrryoouhafdtzlb';			
+		$mail->Username = $email;
+		$mail->Password = $pass;			
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;		
 		$mail->Port = 587;
-		$mail->setFrom('oto.sadzonki@gmail.com', 'Oto.Sadzonki');
-		$mail->addAddress($email);
+		$mail->setFrom($email, 'Oto.Sadzonki');
+		$mail->addAddress($user_email);
 		$mail->isHTML(true);
 		
 		$mail->Subject = 'Odbierz sadzonki';

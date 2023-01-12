@@ -1,3 +1,6 @@
 # ignoring vendor directory, 
 # you can download them from AdminLTE or import from vendor.zip
 vendor/
+credentials/db-login.php
+credentials/email-login.php
+paypal/client-id.php

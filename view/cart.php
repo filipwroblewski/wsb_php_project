@@ -56,7 +56,10 @@
 </div>
 
 <!-- set up paypal payment -->
-<script src="https://www.paypal.com/sdk/js?client-id=AYI9DqkWF_HBhG_Yj3qsJcPxeft3wZL-sKlmO9Thdw0D65gGTYyqe3bGlxXM5rmc-akm9HBzPk1SIiu1&disable-funding=p24,card,blik&currency=PLN"></script>
+<?php 
+    require_once('../paypal/client-id.php'); 
+    echo '<script src="https://www.paypal.com/sdk/js?client-id='.$clientId.'&disable-funding=p24,card,blik&currency=PLN"></script>';
+?>
 <script>
     var total = '<?php echo $_SESSION['cart']['fullPrice']; ?>'
     paypal.Buttons({
